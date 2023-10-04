@@ -1,4 +1,5 @@
 import { Model } from 'sequelize';
+
 export default (sequelize, DataTypes) => {
   class Post extends Model {
     static associate(models) {

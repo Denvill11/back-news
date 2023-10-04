@@ -1,4 +1,4 @@
-const { ConfigModule } = require('@nestjs/config');
+import { ConfigModule } from '@nestjs/config';
 
 ConfigModule.forRoot({ isGlobal: true });
 

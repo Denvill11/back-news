@@ -1,8 +1,7 @@
 import { Model } from 'sequelize';
+
 export default (sequelize, DataTypes) => {
-  class TagPost extends Model {
-    static associate() {}
-  }
+  class TagPost extends Model {}
   TagPost.init(
     {
       tagId: DataTypes.INTEGER,

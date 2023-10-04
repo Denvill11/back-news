@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Tags', {
@@ -10,6 +9,7 @@ module.exports = {
       },
       name: {
         allowNull: false,
+        unique: true,
         validate: {
           notEmpty: true,
         },
