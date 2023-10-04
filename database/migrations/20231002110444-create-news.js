@@ -24,7 +24,8 @@ module.exports = {
       authorId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        reference: {
+        onDelete: 'CASCADE',
+        references: {
           model: 'Users',
           key: 'id',
         },

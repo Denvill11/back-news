@@ -26,4 +26,5 @@ export default (sequelize, DataTypes) => {
       user.password = bcrypt.hash(user.password, process.env.SALT);
     }
   });
+  return User;
 };
