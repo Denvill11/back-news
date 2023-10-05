@@ -19,3 +19,5 @@ export default (sequelize, DataTypes) => {
   );
   return Tag;
 };
+
+export { Tag };

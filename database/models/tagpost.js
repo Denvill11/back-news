@@ -14,3 +14,5 @@ export default (sequelize, DataTypes) => {
   );
   return TagPost;
 };
+
+export { TagPost };

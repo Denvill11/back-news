@@ -3,6 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Post } from '../database/models/post.js';
+import { Tag } from '../database/models/tag.js';
+import { TagPost } from '../database/models/tagpost.js';
+import { User } from '../database/models/user.model';
 
 @Module({
   imports: [
@@ -16,7 +20,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      models: [],
+      models: [Post, Tag, User, TagPost],
     }),
   ],
   controllers: [AppController],

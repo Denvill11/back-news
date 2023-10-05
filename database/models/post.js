@@ -26,3 +26,5 @@ export default (sequelize, DataTypes) => {
   );
   return Post;
 };
+
+export { Post };
