@@ -1,32 +1,38 @@
-import { BelongsTo, Column, ForeignKey, Table } from 'sequelize-typescript';
-import { Model } from 'sequelize/types/model';
+import {
+  BelongsTo,
+  Column,
+  ForeignKey,
+  Table,
+  Model,
+  HasMany,
+} from 'sequelize-typescript';
 import { User } from './user.model';
-
-export interface ASD {
-  title: string;
-  info: string;
-  autorId: number;
-  imagePath: string;
-}
+import { Tag } from './tag.model';
 
 @Table
-export class Post extends Model<Post, ASD> {
-  @Column
-  id: number;
-
-  @Column
+export class Post extends Model {
+  @Column({ allowNull: false })
   title: string;
 
-  @Column
+  @Column({ allowNull: false })
   info: string;
 
   @ForeignKey(() => User)
-  @Column
+  @Column({ allowNull: false })
   autorId: number;
 
   @Column
   imagePath: string;
 
+  @Column({ allowNull: false })
+  createdAt?: Date;
+
+  @Column({ allowNull: false })
+  updatedAt?: Date;
+
   @BelongsTo(() => User)
   user: User;
+
+  @HasMany(() => Tag)
+  tags: Tag[];
 }
