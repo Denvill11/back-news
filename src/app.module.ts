@@ -3,10 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Post } from '../database/models/post.js';
-import { Tag } from '../database/models/tag.js';
-import { TagPost } from '../database/models/tagpost.js';
 import { User } from '../database/models/user.model';
+import { Post } from '../database/models/post.model';
+import { Tag } from '../database/models/tag.model';
+import { TagPost } from '../database/models/tagPost';
 
 @Module({
   imports: [
@@ -22,6 +22,7 @@ import { User } from '../database/models/user.model';
       database: process.env.DB_DATABASE,
       models: [Post, Tag, User, TagPost],
     }),
+    SequelizeModule.forFeature([Post]),
   ],
   controllers: [AppController],
   providers: [AppService],

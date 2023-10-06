@@ -1,18 +1,25 @@
 import { Post } from './post.model';
 import {
   Column,
-  HasMany,
   Table,
   Model,
   ForeignKey,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import { TagPost } from './tagPost';
 
 @Table
 export class Tag extends Model {
   @ForeignKey(() => Post)
-  @Column({ allowNull: false })
+  @Column({ allowNull: true })
   name: string;
 
-  @HasMany(() => Post)
+  @Column({ allowNull: false })
+  createdAt?: Date;
+
+  @Column({ allowNull: false })
+  updatedAt?: Date;
+
+  @BelongsToMany(() => Post, () => TagPost)
   posts: Post[];
 }
