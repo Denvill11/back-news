@@ -22,12 +22,6 @@ export class User extends Model {
   @Column({ allowNull: true })
   avatarPath: string;
 
-  @Column({ allowNull: false })
-  text: string;
-
-  @Column({ allowNull: true, defaultValue: false })
-  status: boolean;
-
   @HasMany(() => Post, {
     onDelete: 'CASCADE',
   })

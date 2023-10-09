@@ -7,6 +7,7 @@ import { User } from '../database/models/user.model';
 import { Post } from '../database/models/post.model';
 import { Tag } from '../database/models/tag.model';
 import { TagPost } from '../database/models/tagPost';
+import { PostModule } from './modules/post/post.module';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { TagPost } from '../database/models/tagPost';
       database: process.env.DB_DATABASE,
       models: [Post, Tag, User, TagPost],
     }),
-    SequelizeModule.forFeature([Post]),
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService],

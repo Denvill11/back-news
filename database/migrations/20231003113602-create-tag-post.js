@@ -1,6 +1,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('TagPost', {
+    await queryInterface.createTable('TagPosts', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,7 +10,7 @@ module.exports = {
       tagId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        reference: {
+        references: {
           model: 'Tags',
           key: 'id',
         },
@@ -18,7 +18,7 @@ module.exports = {
       postId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        reference: {
+        references: {
           model: 'Posts',
           key: 'id',
         },
@@ -34,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('TagPost');
+    await queryInterface.dropTable('TagPosts');
   },
 };

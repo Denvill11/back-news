@@ -4,10 +4,11 @@ import {
   ForeignKey,
   Table,
   Model,
-  HasMany,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import { User } from './user.model';
 import { Tag } from './tag.model';
+import { TagPost } from './tagPost';
 
 @Table
 export class Post extends Model {
@@ -19,7 +20,7 @@ export class Post extends Model {
 
   @ForeignKey(() => User)
   @Column({ allowNull: false })
-  autorId: number;
+  authorId: number;
 
   @Column
   imagePath: string;
@@ -33,6 +34,6 @@ export class Post extends Model {
   @BelongsTo(() => User)
   user: User;
 
-  @HasMany(() => Tag)
+  @BelongsToMany(() => Tag, () => TagPost)
   tags: Tag[];
 }
