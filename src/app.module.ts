@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
 import { User } from '../database/models/user.model';
 import { Post } from '../database/models/post.model';
 import { Tag } from '../database/models/tag.model';

@@ -1,4 +1,5 @@
 import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+
 import { Tag } from './tag.model';
 import { Post } from './post.model';
 

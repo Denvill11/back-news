@@ -14,13 +14,13 @@ export class PostService {
     @InjectModel(Tag) private tagInfo: typeof Tag,
   ) {}
 
-  async getAllPosts() {
+  async getAllPosts(): Promise<PostData[]> {
     const posts = await this.postsInfo.findAll({
       include: [
         { model: this.userInfo, attributes: ['id', 'login'] },
         {
           model: this.tagInfo,
-          attributes: ['id', 'name'],
+          attributes: ['name'],
           through: { attributes: [] },
         },
       ],

@@ -10,4 +10,8 @@ export interface PostData {
     id?: number;
     login: string;
   };
+  tags?: {
+    id?: number;
+    name: string;
+  }[];
 }

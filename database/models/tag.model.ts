@@ -1,4 +1,3 @@
-import { Post } from './post.model';
 import {
   Column,
   Table,
@@ -6,6 +5,8 @@ import {
   ForeignKey,
   BelongsToMany,
 } from 'sequelize-typescript';
+
+import { Post } from './post.model';
 import { TagPost } from './tagPost';
 
 @Table

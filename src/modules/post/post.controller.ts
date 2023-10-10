@@ -6,7 +6,7 @@ import { PostData } from './types/index.t';
 export class PostController {
   constructor(private readonly postService: PostService) {}
   @Get()
-  getAllPosts() {
+  getAllPosts(): Promise<PostData[]> {
     return this.postService.getAllPosts();
   }
 }

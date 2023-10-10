@@ -1,4 +1,3 @@
-import { Post } from './post.model';
 import {
   BeforeCreate,
   Column,
@@ -6,6 +5,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
+
+import { Post } from './post.model';
 import * as bcrypt from 'bcrypt';
 
 @Table

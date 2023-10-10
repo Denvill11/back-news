@@ -6,6 +6,7 @@ import {
   Model,
   BelongsToMany,
 } from 'sequelize-typescript';
+
 import { User } from './user.model';
 import { Tag } from './tag.model';
 import { TagPost } from './tagPost';
