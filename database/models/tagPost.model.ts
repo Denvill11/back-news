@@ -14,8 +14,8 @@ export class TagPost extends Model {
   postId: number;
 
   @Column({ allowNull: false })
-  createdAt?: Date;
+  createdAt: Date;
 
   @Column({ allowNull: false })
-  updatedAt?: Date;
+  updatedAt: Date;
 }

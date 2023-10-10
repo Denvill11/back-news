@@ -11,7 +11,6 @@ export interface PostData {
     login: string;
   };
   tags?: {
-    id?: number;
     name: string;
   }[];
 }

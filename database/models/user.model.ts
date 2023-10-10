@@ -6,8 +6,9 @@ import {
   Table,
 } from 'sequelize-typescript';
 
-import { Post } from './post.model';
 import * as bcrypt from 'bcrypt';
+
+import { Post } from './post.model';
 
 @Table
 export class User extends Model {
@@ -22,6 +23,12 @@ export class User extends Model {
 
   @Column({ allowNull: true })
   avatarPath: string;
+
+  @Column({ allowNull: false })
+  createdAt: Date;
+
+  @Column({ allowNull: false })
+  updatedAt: Date;
 
   @HasMany(() => Post, {
     onDelete: 'CASCADE',

@@ -9,7 +9,7 @@ import {
 
 import { User } from './user.model';
 import { Tag } from './tag.model';
-import { TagPost } from './tagPost';
+import { TagPost } from './tagPost.model';
 
 @Table
 export class Post extends Model {
@@ -27,12 +27,14 @@ export class Post extends Model {
   imagePath: string;
 
   @Column({ allowNull: false })
-  createdAt?: Date;
+  createdAt: Date;
 
   @Column({ allowNull: false })
-  updatedAt?: Date;
+  updatedAt: Date;
 
-  @BelongsTo(() => User)
+  @BelongsTo(() => User, {
+    onDelete: 'CASCADE',
+  })
   user: User;
 
   @BelongsToMany(() => Tag, () => TagPost)

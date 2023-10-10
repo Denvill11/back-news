@@ -8,7 +8,7 @@ import { AppService } from './app.service';
 import { User } from '../database/models/user.model';
 import { Post } from '../database/models/post.model';
 import { Tag } from '../database/models/tag.model';
-import { TagPost } from '../database/models/tagPost';
+import { TagPost } from '../database/models/tagPost.model';
 import { PostModule } from './modules/post/post.module';
 
 @Module({
