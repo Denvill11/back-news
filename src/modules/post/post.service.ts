@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 
 import { Post } from 'database/models/post.model';
 import { User } from 'database/models/user.model';
-import { PostData } from './types/index.t';
+import { PostData } from './types';
 import { Tag } from 'database/models/tag.model';
 
 @Injectable()

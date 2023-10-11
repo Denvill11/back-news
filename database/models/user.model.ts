@@ -6,9 +6,9 @@ import {
   Table,
 } from 'sequelize-typescript';
 
-import * as bcrypt from 'bcrypt';
-
 import { Post } from './post.model';
+
+import * as bcrypt from 'bcrypt';
 
 @Table
 export class User extends Model {

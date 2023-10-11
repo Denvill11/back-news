@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 
+import { PostData } from './types/index.d';
 import { PostService } from './post.service';
-import { PostData } from './types/index.t';
 
 @Controller('/posts')
 export class PostController {
