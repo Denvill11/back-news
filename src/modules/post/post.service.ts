@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 
-import { Post } from 'database/models/post.model';
-import { User } from 'database/models/user.model';
+import { Post } from '../../../database/models/post.model';
+import { User } from '../../../database/models/user.model';
+import { Tag } from '../../../database/models/tag.model';
 import { PostData } from './types';
-import { Tag } from 'database/models/tag.model';
 
 @Injectable()
 export class PostService {
