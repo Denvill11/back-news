@@ -10,6 +10,9 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
 import { CreateUserDto } from './dto/create-user.dto';
+import { ErrorMessage } from './constants/errorMessages';
+import { LogInUserDTO } from './dto/login-user.dto';
+
 import { User } from '../../../database/models/user.model';
 
 @Injectable()
@@ -19,9 +22,19 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async loginUser(userDto: CreateUserDto) {
+  async getUserInfo(userId: number) {
+    const userInfo = await this.userData.findOne({
+      where: { id: userId },
+      attributes: ['email', 'login'],
+    });
+    return userInfo;
+  }
+
+  async loginUser(userDto: LogInUserDTO) {
     const user = await this.validateUser(userDto);
-    return this.generateToken(user);
+    delete user.password;
+    const token = await this.generateToken(user.id);
+    return { token, user };
   }
 
   async registrationUser(userDto: CreateUserDto) {
@@ -31,43 +44,34 @@ export class AuthService {
 
     if (candidateEmail) {
       throw new HttpException(
-        'A user with this email already exists',
+        ErrorMessage.userExistError,
         HttpStatus.BAD_REQUEST,
       );
     }
 
-    const candidateLogin = await this.userData.findOne({
-      where: { login: userDto.login },
-    });
-
-    if (candidateLogin) {
-      throw new HttpException(
-        'A user with this login already exists',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
     const user = await this.userData.create(userDto);
-    return this.generateToken(user);
+    const token = await this.generateToken(user.id);
+    return { user, token };
   }
 
-  private async generateToken(user: User) {
-    const payload = { email: user.email, id: user.id };
-    return {
-      token: this.jwtService.sign(payload),
-    };
+  private generateToken(id: number) {
+    return this.jwtService.signAsync({ id });
   }
 
-  private async validateUser(userDto: CreateUserDto) {
+  private async validateUser(userDto: LogInUserDTO) {
     const user = await this.userData.findOne({
       where: { email: userDto.email },
     });
+    if (!user) {
+      throw new UnauthorizedException({ message: ErrorMessage.emailError });
+    }
     const passwordEquals = await bcrypt.compare(
       userDto.password,
       user.password,
     );
-    if (user && passwordEquals) {
-      return user;
+    if (!passwordEquals) {
+      throw new UnauthorizedException({ message: ErrorMessage.passwordError });
     }
-    throw new UnauthorizedException({ message: 'Incorrect email or password' });
+    return user;
   }
 }

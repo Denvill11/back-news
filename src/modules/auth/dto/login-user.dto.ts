@@ -2,17 +2,12 @@ import { Transform } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 import { ErrorMessage } from '../constants/errorMessages';
 
-export class CreateUserDto {
+export class LogInUserDTO {
   @IsNotEmpty()
   @IsEmail()
   @IsString()
   @Transform(({ value }) => value.trim())
   readonly email?: string;
-
-  @IsNotEmpty()
-  @IsString()
-  @Transform(({ value }) => value.trim())
-  readonly login?: string;
 
   @IsNotEmpty()
   @IsString()
