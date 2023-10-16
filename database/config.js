@@ -1,7 +1,3 @@
-import { ConfigModule } from '@nestjs/config';
-
-ConfigModule.forRoot({ isGlobal: true });
-
 module.exports = {
   dialect: 'postgres',
   host: process.env.DB_HOST,
