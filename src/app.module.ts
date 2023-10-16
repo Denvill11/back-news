@@ -10,6 +10,7 @@ import { Post } from '../database/models/post.model';
 import { Tag } from '../database/models/tag.model';
 import { TagPost } from '../database/models/tagPost.model';
 import { PostModule } from './modules/post/post.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { PostModule } from './modules/post/post.module';
       models: [Post, Tag, User, TagPost],
     }),
     PostModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

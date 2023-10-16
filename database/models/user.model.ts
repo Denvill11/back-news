@@ -9,8 +9,14 @@ import * as bcrypt from 'bcrypt';
 
 import { Post } from './post.model';
 
+export interface UserForCreate {
+  email: string;
+  login: string;
+  password: string;
+}
+
 @Table
-export class User extends Model {
+export class User extends Model<User, UserForCreate> {
   @Column({ allowNull: false, unique: true })
   email: string;
 
@@ -36,6 +42,6 @@ export class User extends Model {
 
   @BeforeCreate
   static async hashPassword(user: User) {
-    user.password = await bcrypt.hash(user.password, process.env.SALT);
+    user.password = await bcrypt.hash(user.password, Number(process.env.SALT));
   }
 }
