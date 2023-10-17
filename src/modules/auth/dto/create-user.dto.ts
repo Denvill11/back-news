@@ -1,6 +1,7 @@
 import { Transform } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
-import { ErrorMessage } from '../constants/errorMessages';
+
+import { errorMessage } from '../constants/errorMessages';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -16,7 +17,7 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
-  @MinLength(8, { message: ErrorMessage.smallPassword })
+  @MinLength(8, { message: errorMessage.SMALL_PASSWORD })
   @Transform(({ value }) => value.trim())
   readonly password?: string;
 }

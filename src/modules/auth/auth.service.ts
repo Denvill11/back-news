@@ -6,21 +6,24 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { JwtService } from '@nestjs/jwt';
-
 import * as bcrypt from 'bcrypt';
 
-import { CreateUserDto } from './dto/create-user.dto';
-import { ErrorMessage } from './constants/errorMessages';
-import { LogInUserDTO } from './dto/login-user.dto';
-
 import { User } from '../../../database/models/user.model';
+
+import { CreateUserDto } from './dto/create-user.dto';
+import { errorMessage } from './constants/errorMessages';
+import { LogInUserDTO } from './dto/login-user.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(User) private userData: typeof User,
-    private jwtService: JwtService,
+    @InjectModel(User) private readonly userData: typeof User,
+    private readonly jwtService: JwtService,
   ) {}
+
+  private generateToken(id: number) {
+    return this.jwtService.signAsync({ id });
+  }
 
   async getUserInfo(userId: number) {
     const userInfo = await this.userData.findOne({
@@ -44,18 +47,15 @@ export class AuthService {
 
     if (candidateEmail) {
       throw new HttpException(
-        ErrorMessage.userExistError,
+        errorMessage.USER_EXIST_ERROR,
         HttpStatus.BAD_REQUEST,
       );
     }
 
     const user = await this.userData.create(userDto);
     const token = await this.generateToken(user.id);
+    delete user.password;
     return { user, token };
-  }
-
-  private generateToken(id: number) {
-    return this.jwtService.signAsync({ id });
   }
 
   private async validateUser(userDto: LogInUserDTO) {
@@ -63,14 +63,14 @@ export class AuthService {
       where: { email: userDto.email },
     });
     if (!user) {
-      throw new UnauthorizedException({ message: ErrorMessage.emailError });
+      throw new UnauthorizedException({ message: errorMessage.EMAIL_ERROR });
     }
-    const passwordEquals = await bcrypt.compare(
+    const isPasswordEquals = await bcrypt.compare(
       userDto.password,
       user.password,
     );
-    if (!passwordEquals) {
-      throw new UnauthorizedException({ message: ErrorMessage.passwordError });
+    if (!isPasswordEquals) {
+      throw new UnauthorizedException({ message: errorMessage.PASSWORD_ERROR });
     }
     return user;
   }

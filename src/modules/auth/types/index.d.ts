@@ -1,4 +1,4 @@
-import { User } from 'database/models/user.model';
+import { User } from '../../../../database/models/user.model';
 
 export interface RegistrationData {
   user: User;

@@ -7,14 +7,14 @@ import {
   Request,
 } from '@nestjs/common';
 
+import { User } from '../../../database/models/user.model';
+
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthGuard } from './guards/jwt-auth.guard';
 import { LogInUserDTO } from './dto/login-user.dto';
 import { WhoamiDTO } from './dto/whoami-user.dto';
 import { RegistrationData } from './types';
-
-import { User } from '../../../database/models/user.model';
 
 @Controller('/auth')
 export class AuthController {

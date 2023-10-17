@@ -3,10 +3,10 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 
+import { User } from '../../../database/models/user.model';
+
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-
-import { User } from '../../../database/models/user.model';
 
 @Module({
   providers: [AuthService],
@@ -19,7 +19,7 @@ import { User } from '../../../database/models/user.model';
     JwtModule.register({
       secret: process.env.PRIVATE_KEY,
       signOptions: {
-        expiresIn: '24h',
+        expiresIn: process.env.TIME,
       },
     }),
   ],

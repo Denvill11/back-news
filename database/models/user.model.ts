@@ -8,12 +8,7 @@ import {
 import * as bcrypt from 'bcrypt';
 
 import { Post } from './post.model';
-
-export interface UserForCreate {
-  email: string;
-  login: string;
-  password: string;
-}
+import { UserForCreate } from '.';
 
 @Table
 export class User extends Model<User, UserForCreate> {
