@@ -8,10 +8,9 @@ import {
 import * as bcrypt from 'bcrypt';
 
 import { Post } from './post.model';
-import { UserForCreate } from '.';
 
 @Table
-export class User extends Model<User, UserForCreate> {
+export class User extends Model<User> {
   @Column({ allowNull: false, unique: true })
   email: string;
 

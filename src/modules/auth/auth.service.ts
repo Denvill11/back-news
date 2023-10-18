@@ -11,7 +11,7 @@ import * as bcrypt from 'bcrypt';
 import { User } from '../../../database/models/user.model';
 
 import { CreateUserDto } from './dto/create-user.dto';
-import { errorMessage } from './constants/errorMessages';
+import { errorMessages } from './constants/errorMessages';
 import { LogInUserDTO } from './dto/login-user.dto';
 
 @Injectable()
@@ -47,7 +47,7 @@ export class AuthService {
 
     if (candidateEmail) {
       throw new HttpException(
-        errorMessage.USER_EXIST_ERROR,
+        errorMessages.USER_EXIST_ERROR,
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -63,14 +63,16 @@ export class AuthService {
       where: { email: userDto.email },
     });
     if (!user) {
-      throw new UnauthorizedException({ message: errorMessage.EMAIL_ERROR });
+      throw new UnauthorizedException({ message: errorMessages.EMAIL_ERROR });
     }
     const isPasswordEquals = await bcrypt.compare(
       userDto.password,
       user.password,
     );
     if (!isPasswordEquals) {
-      throw new UnauthorizedException({ message: errorMessage.PASSWORD_ERROR });
+      throw new UnauthorizedException({
+        message: errorMessages.PASSWORD_ERROR,
+      });
     }
     return user;
   }
