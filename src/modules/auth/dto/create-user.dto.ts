@@ -8,16 +8,16 @@ export class CreateUserDto {
   @IsEmail()
   @IsString()
   @Transform(({ value }) => value.trim())
-  readonly email?: string;
+  readonly email: string;
 
   @IsNotEmpty()
   @IsString()
   @Transform(({ value }) => value.trim())
-  readonly login?: string;
+  readonly login: string;
 
   @IsNotEmpty()
   @IsString()
   @MinLength(8, { message: errorMessages.SMALL_PASSWORD })
   @Transform(({ value }) => value.trim())
-  readonly password?: string;
+  readonly password: string;
 }

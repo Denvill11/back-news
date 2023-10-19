@@ -13,6 +13,12 @@ import { TagPost } from './tagPost.model';
 
 @Table
 export class Post extends Model {
+  @Column({
+    primaryKey: true,
+    allowNull: false,
+  })
+  id: number;
+
   @Column({ allowNull: false })
   title: string;
 

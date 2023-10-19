@@ -13,12 +13,12 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthGuard } from './guards/jwt-auth.guard';
 import { LogInUserDTO } from './dto/login-user.dto';
-import { WhoamiDTO } from './dto/whoami-user.dto';
+import { whoamiType } from './dto/whoami-user.dto';
 import { RegistrationData } from './types';
 
 @Controller('/auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('/login')
   loginUser(@Body() userDto: LogInUserDTO): Promise<RegistrationData> {
@@ -32,7 +32,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Get('/whoami')
-  getUserInfo(@Request() req: WhoamiDTO): Promise<User> {
+  getUserInfo(@Request() req: whoamiType): Promise<User> {
     return this.authService.getUserInfo(req.user.id);
   }
 }

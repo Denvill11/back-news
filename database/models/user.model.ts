@@ -36,6 +36,9 @@ export class User extends Model<User> {
 
   @BeforeCreate
   static async hashPassword(user: User) {
-    user.password = await bcrypt.hash(user.password, Number(process.env.SALT));
+    user.password = await bcrypt.hash(
+      user.password,
+      Number(process.env.SALT_ROUNDS),
+    );
   }
 }
