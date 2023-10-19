@@ -68,7 +68,7 @@ export class AuthService {
       userDto.password,
       user.password,
     );
-    if (isPasswordEquals === null) {
+    if (!isPasswordEquals) {
       throw new UnauthorizedException({
         message: errorMessages.PASSWORD_ERROR,
       });
