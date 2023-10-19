@@ -6,7 +6,6 @@ import { errorMessages } from '../constants/errorMessages';
 export class LogInUserDTO {
   @IsNotEmpty()
   @IsEmail()
-  @IsString()
   @Transform(({ value }) => value.trim())
   readonly email: string;
 

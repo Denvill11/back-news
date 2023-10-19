@@ -26,11 +26,10 @@ export class AuthService {
   }
 
   async getUserInfo(userId: number) {
-    const userInfo = await this.userData.findOne({
+    return await this.userData.findOne({
       where: { id: userId },
       attributes: ['email', 'login'],
     });
-    return userInfo;
   }
 
   async loginUser(userDto: LogInUserDTO) {
@@ -45,7 +44,7 @@ export class AuthService {
       where: { email: userDto.email },
     });
 
-    if (candidateEmail) {
+    if (candidateEmail !== null) {
       throw new HttpException(
         errorMessages.USER_EXIST_ERROR,
         HttpStatus.BAD_REQUEST,
@@ -62,14 +61,14 @@ export class AuthService {
     const user = await this.userData.findOne({
       where: { email: userDto.email },
     });
-    if (!user) {
+    if (user === null) {
       throw new UnauthorizedException({ message: errorMessages.EMAIL_ERROR });
     }
     const isPasswordEquals = await bcrypt.compare(
       userDto.password,
       user.password,
     );
-    if (!isPasswordEquals) {
+    if (isPasswordEquals === null) {
       throw new UnauthorizedException({
         message: errorMessages.PASSWORD_ERROR,
       });
