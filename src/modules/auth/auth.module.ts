@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { User } from '../../../database/models/user.model';
 
@@ -12,15 +12,16 @@ import { AuthController } from './auth.controller';
   providers: [AuthService],
   controllers: [AuthController],
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-    }),
     SequelizeModule.forFeature([User]),
-    JwtModule.register({
-      secret: process.env.PRIVATE_KEY,
-      signOptions: {
-        expiresIn: process.env.TIME,
-      },
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('PRIVATE_KEY'),
+        signOptions: {
+          expiresIn: configService.get<number>('TIME'),
+        },
+      }),
+      inject: [ConfigService],
     }),
   ],
 })
