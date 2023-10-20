@@ -15,6 +15,5 @@ export class Tag extends Model {
   updatedAt: Date;
 
   @BelongsToMany(() => Post, () => TagPost)
-  through: { attributes: [] };
   posts: Post[];
 }

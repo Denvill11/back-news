@@ -1,5 +1,5 @@
 export interface PostData {
-  id?: number;
+  id: number;
   title: string;
   info: string;
   authorId: number;
