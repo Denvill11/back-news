@@ -27,13 +27,11 @@ export class UserService {
         },
       ],
     });
-    if (user === null) {
+    if (user === null)
       throw new HttpException(
         errorMessages.USER_DOES_NOT_EXIST,
         HttpStatus.BAD_REQUEST,
       );
-    } else {
-      return user;
-    }
+    return user;
   }
 }
