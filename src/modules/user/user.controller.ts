@@ -15,7 +15,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
   @UseGuards(AuthGuard)
   @Get('/:id')
-  async getUserInfo(@Param('id', ParseIntPipe) id: number) {
+  getUserInfo(@Param('id', ParseIntPipe) id: number) {
     return this.userService.getUserInfo(id);
   }
 }
