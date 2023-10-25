@@ -6,7 +6,7 @@ export interface PostData {
   imagePath: string;
   createdAt?: Date;
   updatedAt?: Date;
-  user?: {
+  user: {
     id?: number;
     login: string;
   };
