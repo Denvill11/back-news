@@ -8,10 +8,10 @@ import {
 } from '@nestjs/common';
 
 import { User } from '../../../database/models/user.model';
+import { AuthGuard } from '../../guards/jwt-auth.guard';
 
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { AuthGuard } from './guards/jwt-auth.guard';
 import { LogInUserDTO } from './dto/login-user.dto';
 import { whoamiType } from './dto/whoami-user.dto';
 import { RegistrationData } from './types';
