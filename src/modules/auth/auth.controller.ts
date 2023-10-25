@@ -8,7 +8,6 @@ import {
 } from '@nestjs/common';
 
 import { User } from '../../../database/models/user.model';
-
 import { AuthGuard } from '../../guards/jwt-auth.guard';
 
 import { AuthService } from './auth.service';

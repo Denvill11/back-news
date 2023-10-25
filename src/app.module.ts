@@ -12,6 +12,7 @@ import { AppService } from './app.service';
 import { PostModule } from './modules/post/post.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
+import { CustomJwtModule } from './modules/custom-jwt/custom-jwt.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { UserModule } from './modules/user/user.module';
     PostModule,
     AuthModule,
     UserModule,
+    CustomJwtModule,
   ],
   controllers: [AppController],
   providers: [AppService],

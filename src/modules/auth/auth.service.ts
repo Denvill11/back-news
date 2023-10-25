@@ -28,7 +28,12 @@ export class AuthService {
   async getUserInfo(userId: number) {
     return await this.userData.findOne({
       where: { id: userId },
-      attributes: ['id', 'login', 'email', 'avatarPath'],
+      attributes: [
+        'id',
+        'login',
+        'email',
+        'avatarPath'
+      ],
     });
   }
 
